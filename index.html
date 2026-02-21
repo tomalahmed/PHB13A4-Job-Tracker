@@ -5,6 +5,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Job Application Tracker</title>
+    <link rel="stylesheet" href="./style.css" />
+
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
+
   </head>
   <body>
     <div class="container">
@@ -26,7 +33,26 @@
         </div>
       </div>
 
-      
+      <!-- Available Jobs Section -->
+      <div class="jobs-section">
+        <div class="section-header">
+          <h2 class="section-title">Available Jobs</h2>
+          <span class="jobs-count">0 jobs</span>
+        </div>
+
+        <!-- Tabs -->
+        <div class="tabs">
+          <button class="tab active" data-tab="all">All</button>
+          <button class="tab" data-tab="interview">Interview</button>
+          <button class="tab" data-tab="rejected">Rejected</button>
+        </div>
+
+        <!-- Jobs List -->
+        <div class="jobs-list"></div>
+      </div>
+
     </div>
-  </body>
+
+
+  </body>  
 </html>
