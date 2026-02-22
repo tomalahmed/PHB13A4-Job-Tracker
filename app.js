@@ -1,4 +1,4 @@
-// Dataset
+// Dataset/Database
 const jobsData = [
   {
     id: 1,
@@ -164,7 +164,6 @@ function render() {
 
 
 // Actions
-
 function setStatus(id, newStatus) {
   const job = jobs.find((j) => j.id === id);
   if (!job) return;
@@ -178,7 +177,6 @@ function deleteJob(id) {
 }
 
 // Job Card Creation
-
 function createJobCard(job) {
   const card = document.createElement("div");
   card.className = "job-card";
@@ -216,8 +214,8 @@ function createJobCard(job) {
   return card;
 }
 
-// Event Listeners
 
+// Event Listeners
 document.getElementById("jobs-list").addEventListener("click", (e) => {
   const del = e.target.closest(".delete-btn");
   const intv = e.target.closest(".btn-interview");

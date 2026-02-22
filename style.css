@@ -119,3 +119,164 @@ body {
 .tab:hover:not(.active) {
   background: #f3f4f6;
 }
+
+
+/* Jobs List*/
+.jobs-list {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.job-card {
+  padding: 20px 24px;
+  border-bottom: 1px solid #e5e7eb;
+  background: #ffffff;
+}
+
+.job-card:last-child {
+  border-bottom: none;
+}
+
+.job-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2px;
+}
+
+.company-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1e3a5f;
+}
+
+.delete-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #9ca3af;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  transition: color 0.2s;
+  flex-shrink: 0;
+}
+
+.delete-btn:hover {
+  color: #ef4444;
+}
+
+.position {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin-bottom: 6px;
+}
+
+.job-meta {
+  font-size: 0.8125rem;
+  color: #9ca3af;
+  margin-bottom: 12px;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  border: 1px solid;
+}
+
+.status-badge.not-applied {
+  color: #0891b2;
+  border-color: #0891b2;
+}
+
+.status-badge.interview {
+  color: #16a34a;
+  border-color: #16a34a;
+}
+
+.status-badge.rejected {
+  color: #ef4444;
+  border-color: #ef4444;
+}
+
+.description {
+  font-size: 0.8125rem;
+  color: #6b7280;
+  margin-bottom: 14px;
+  line-height: 1.5;
+}
+
+.card-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-interview,
+.btn-rejected {
+  padding: 5px 14px;
+  border-radius: 4px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+}
+
+.btn-interview {
+  border: 1px solid #16a34a;
+  color: #16a34a;
+}
+
+.btn-interview:hover,
+.btn-interview.active {
+  background: #16a34a;
+  color: #ffffff;
+
+}
+
+.btn-rejected {
+  border: 1px solid #ef4444;
+  color: #ef4444;
+}
+
+.btn-rejected:hover,
+.btn-rejected.active {
+  background: #ef4444;
+  color: #ffffff;
+}
+
+/* Empty State */
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 24px;
+}
+
+.empty-icon {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 20px;
+  opacity: 0.75;
+}
+
+.empty-state h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1e3a5f;
+  margin-bottom: 8px;
+}
+
+.empty-state p {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
