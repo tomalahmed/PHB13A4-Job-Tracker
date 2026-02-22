@@ -280,3 +280,34 @@ body {
   font-size: 0.875rem;
   color: #6b7280;
 }
+
+/* responsive */
+@media (max-width: 768px) {
+  .site-title {
+    font-size: 1.5rem;
+  }
+
+  .dashboard {
+    grid-template-columns: 1fr;
+  }
+
+  .stat-value {
+    font-size: 1.5rem;
+  }
+
+  .jobs-section {
+    padding: 16px;
+  }
+
+  .section-title {
+    font-size: 1.25rem;
+  }
+
+  .job-card {
+    padding: 16px;
+  }
+
+  .card-actions {
+    flex-wrap: wrap;
+  }
+}
