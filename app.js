@@ -1,3 +1,4 @@
+// Dataset
 const jobsData = [
   {
     id: 1,
@@ -89,4 +90,152 @@ const jobsData = [
   },
 ];
 
-console.log(jobsData);
+let jobs = jobsData.map((j) => ({ ...j }));
+let activeTab = "all";
+
+
+// Utility Functions
+
+function getDisplayedJobs() {
+  if (activeTab === "all") return jobs;
+  return jobs.filter((j) => j.status === activeTab);
+}
+
+function getInterviewCount() {
+  return jobs.filter((j) => j.status === "interview").length;
+}
+
+function getRejectedCount() {
+  return jobs.filter((j) => j.status === "rejected").length;
+}
+
+function statusLabel(status) {
+  if (status === "interview") return "INTERVIEW";
+  if (status === "rejected") return "REJECTED";
+  return "NOT APPLIED";
+}
+
+// Dashboard & Counts
+
+function updateDashboard() {
+  document.getElementById("total-count").textContent = jobs.length;
+  document.getElementById("interview-count").textContent = getInterviewCount();
+  document.getElementById("rejected-count").textContent = getRejectedCount();
+}
+
+function updateJobsCount() {
+  const count = getDisplayedJobs().length;
+  document.getElementById("jobs-count").textContent =
+    count + (count === 1 ? " job" : " jobs");
+}
+
+// Empty State
+
+function createEmptyState() {
+  const div = document.createElement("div");
+  div.className = "empty-state";
+  div.innerHTML = `
+    <img src="./Assest/jobs.png" alt="No jobs" class="empty-icon">
+    <h3>No jobs available</h3>
+    <p>Check back soon for new job opportunities</p>
+  `;
+  return div;
+}
+
+
+
+// Main Render
+function render() {
+  const list = document.getElementById("jobs-list");
+  list.innerHTML = "";
+
+  const displayed = getDisplayedJobs();
+
+  if (displayed.length === 0) {
+    list.appendChild(createEmptyState());
+  } else {
+    displayed.forEach((job) => list.appendChild(createJobCard(job)));
+  }
+
+  updateDashboard();
+  updateJobsCount();
+}
+
+
+
+// Actions
+
+function setStatus(id, newStatus) {
+  const job = jobs.find((j) => j.id === id);
+  if (!job) return;
+  job.status = job.status === newStatus ? "not-applied" : newStatus;
+  render();
+}
+
+function deleteJob(id) {
+  jobs = jobs.filter((j) => j.id !== id);
+  render();
+}
+
+// Job Card Creation
+
+function createJobCard(job) {
+  const card = document.createElement("div");
+  card.className = "job-card";
+  card.dataset.id = job.id;
+
+  const meta = `${job.location} &bull; ${job.type} &bull; ${job.salary}`;
+  const badgeClass = job.status === "not-applied" ? "not-applied" : job.status;
+
+  card.innerHTML = `
+    <div class="job-card-header">
+      <span class="company-name">${job.companyName}</span>
+      <button class="delete-btn" data-id="${job.id}" title="Remove">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="3 6 5 6 21 6"></polyline>
+          <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path>
+          <path d="M10 11v6"></path>
+          <path d="M14 11v6"></path>
+          <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"></path>
+        </svg>
+      </button>
+    </div>
+    <div class="position">${job.position}</div>
+    <div class="job-meta">${meta}</div>
+    <span class="status-badge ${badgeClass}">${statusLabel(job.status)}</span>
+    <p class="description">${job.description}</p>
+    <div class="card-actions">
+      <button class="btn-interview${job.status === "interview" ? " active" : ""}"
+              data-id="${job.id}">Interview</button>
+      <button class="btn-rejected${job.status === "rejected" ? " active" : ""}"
+              data-id="${job.id}">Rejected</button>
+    </div>
+  `;
+  return card;
+}
+
+// Event Listeners
+
+document.getElementById("jobs-list").addEventListener("click", (e) => {
+  const del = e.target.closest(".delete-btn");
+  const intv = e.target.closest(".btn-interview");
+  const rej = e.target.closest(".btn-rejected");
+
+  if (del) deleteJob(Number(del.dataset.id));
+  else if (intv) setStatus(Number(intv.dataset.id), "interview");
+  else if (rej) setStatus(Number(rej.dataset.id), "rejected");
+});
+
+document.querySelectorAll(".tab").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    activeTab = btn.dataset.tab;
+    document.querySelectorAll(".tab").forEach((t) =>
+      t.classList.toggle("active", t.dataset.tab === activeTab)
+    );
+    render();
+  });
+});
+
+render();
